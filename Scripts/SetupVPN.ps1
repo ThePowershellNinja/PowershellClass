@@ -25,7 +25,11 @@ process {
         Add-VpnConnection -RememberCredential -Name $Name -ServerAddress $ServerAddress -TunnelType $Protocol -SplitTunneling -ErrorAction Stop
         $PBKFile = Get-Content $PBKPath -Raw
         $PBKFile += "[removeme]"
-        function Set-ConfigProperty ([string]$ItemName, [string]$Value) {
+        function Set-ConfigProperty ([string]$ItemName, [string]$Value, $Name = $Name, $PBKFile = $PBKFile) {
+            $IllegalCharacters = '\','.','*','?','+','{','}','[',']','(',')','|',':','^','$','<','>','&'
+            foreach ($IllegalCharacter in $IllegalCharacters) {
+                $Name = $Name.Replace($IllegalCharacter,"\$IllegalCharacter")
+            }
             $regex = "(?<=\[$Name\].*?)(?=.*?(\[.*?\])|$)($ItemName=.*?\r\n)"
             [regex]::Replace($PBKFile,$regex,"$ItemName=$Value`r`n",[System.Text.RegularExpressions.RegexOptions]"SingleLine")
         }
@@ -38,7 +42,7 @@ process {
         $PBKFile = Set-ConfigProperty -ItemName 'IpNameAssign' -Value '2'
 
         $PBKFile = $PBKFile -replace '\[removeme\]',''
-        $PBKFile | Out-File -FilePath $PBKPath -Force -Encoding ASCII -NoNewline
+        $PBKFile | Out-File -FilePath $PBKPath -Force -Encoding ASCII
     }
     catch {
         Write-Error $_ -ErrorAction Stop
