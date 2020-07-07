@@ -1,3 +1,5 @@
+Add-Type -AssemblyName System.Drawing, System.Windows.Forms
+
 function Calculate-Time {
 
     [CmdletBinding()]
@@ -49,3 +51,44 @@ function Calculate-Time {
 
     }
 }
+
+$Main = [Windows.Forms.Form]@{
+    Size = '1024,768'
+    Text = 'Faradazed'
+}
+
+#StartTimeLabel
+$StartTimeLabel = [Windows.Forms.Label]@{
+    Location = '10,10'
+    Text     = 'Start Time (24 Hour)'
+}
+
+#StartTimeField
+$StartTimeTextBox = [Windows.Forms.TextBox]@{
+    Location = '100,10'
+}
+
+#EndTimeLabel
+$EndTimeLabel = [Windows.Forms.Label]@{
+    Location = '10,50'
+    Text     = 'End Time (24 Hour)'
+}
+
+#EndTimeField
+$EndTimeTextBox = [Windows.Forms.TextBox]@{
+    Location = '100,50'
+}
+
+#CalulateButton
+$CalculateButton = [Windows.Forms.Button]@{
+    Location = '10,100'
+}
+
+#ResultsBox
+$ResultsTextBox = [Windows.Forms.TextBox]@{
+    Location = '100,100'
+}
+
+
+$Main.Controls.AddRange(@($StartTimeTextBox,$StartTimeLabel,$EndTimeTextBox,$EndTimeLabel,$CalculateButton,$ResultsTextBox))
+$Main.ShowDialog()
