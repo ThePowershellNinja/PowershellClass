@@ -1,0 +1,36 @@
+Servers:
+  lab-ms01.lab.local (192.168.7.11)
+  lab-dc01.lab.local (192.168.7.5)
+  lab-ACastle
+  lab-JBaetz
+  lab-RPerez
+  lab-JKato
+  lab-AVillagomez
+  lab-SFranco
+  lab-JTaing
+  lab-DBeaudette
+  lab-SHajebi
+  lab-MJordan
+  lab-MPacher
+  lab-DBrahmbhatt
+  lab-NYu
+  lab-SRusso
+  lab-PYusi
+  lab-DNunziato
+  lab-TBible
+  lab-WKim
+  lab-EPacheco
+  lab-JLlantada
+  lab-FRusso
+
+  To Log into a VM:
+    Username: lab\yourusername
+    Password: P@ssw0rd
+
+  DomainName: lab.local
+  DomainNetBiosName: lab
+  DefaultGateway For Servers: 192.168.7.1
+  DNSServer for Servers: 192.168.7.5
+  SubnetMask for Servers: 255.255.255.0
+  Username Scheme: FirstInitialLastName (Example for John Snow: jsnow)
+  Default Password: P@ssw0rd
