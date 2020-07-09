@@ -53,8 +53,10 @@ function Get-BillingHours {
 }
 
 $Main = [Windows.Forms.Form]@{
-    Size = '1024,768'
-    Text = 'Faradazed'
+    ClientSize      = '460,250'
+    Text            = 'Faradazed'
+    FormBorderStyle = 'Fixed3d'
+    Icon            = "$PSScriptRoot\faradazed.ico"
 }
 
 $Font = New-Object Drawing.Font('GenericSansSerif',24)
@@ -104,8 +106,23 @@ $ResultsTextBox = [Windows.Forms.TextBox]@{
     Location    = '350,130'
     Size        = '100,50'
     Font        = $Font
+    ReadOnly    = $true
 }
 
+$StatusField = [Windows.Forms.Label]@{
+    Location  = '10,190'
+    Size      = '{0},50' -f ($Main.ClientSize.Width - 20)
+    Font      = New-Object Drawing.Font('GenericSansSerif',12)
+    Text      = ''
+    BackColor = 'Black'
+    ForeColor = 'Red'
+}
 
-$Main.Controls.AddRange(@($StartTimeTextBox,$StartTimeLabel,$EndTimeTextBox,$EndTimeLabel,$CalculateButton,$ResultsTextBox))
+$CalculateButton_Click = {
+    $ResultsTextBox.Text = Get-BillingHours -StartTime $StartTimeTextBox.Text -EndTime $EndTimeTextBox.Text
+}
+$CalculateButton.Add_Click($CalculateButton_Click)
+
+
+$Main.Controls.AddRange(@($StartTimeTextBox,$StartTimeLabel,$EndTimeTextBox,$EndTimeLabel,$CalculateButton,$ResultsTextBox,$StatusField))
 $Main.ShowDialog()
