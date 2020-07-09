@@ -18,8 +18,16 @@ function Get-BillingHours {
     }
 
     process {
+
+        if ($EndTime -eq '2400') {
+            $EndTime = '2359'
+        }
+
         try {
             $ConvertedStartTime = [DateTime]::ParseExact($StartTime, 'HHmm', $null)
+            if ($EndTime -eq '2359') {
+                $ConvertedStartTime = $ConvertedStartTime - (New-TimeSpan -Minutes 1)
+            }
         }
         catch {
             Write-Error -Message "StartTime: $StartTime is invalid. Please specify a correct start time in a 24 hour format." -ErrorAction Stop
