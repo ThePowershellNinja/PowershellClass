@@ -6,10 +6,10 @@ function Get-BillingHours {
 
     Param (
 
-        [ValidatePattern('^[0-2][0-9][0-5][0-9]$')]
+        #[ValidatePattern('^[0-2][0-9][0-5][0-9]$')]
         [string]$StartTime,
 
-        [ValidatePattern('^[0-2][0-9][0-5][0-9]$')]
+        #[ValidatePattern('^[0-2][0-9][0-5][0-9]$')]
         [string]$EndTime
     )
 
@@ -119,7 +119,13 @@ $StatusField = [Windows.Forms.Label]@{
 }
 
 $CalculateButton_Click = {
-    $ResultsTextBox.Text = Get-BillingHours -StartTime $StartTimeTextBox.Text -EndTime $EndTimeTextBox.Text
+    try {
+        $StatusField.Text = $null
+        $ResultsTextBox.Text = Get-BillingHours -StartTime $StartTimeTextBox.Text -EndTime $EndTimeTextBox.Text -ErrorAction Stop
+    }
+    catch {
+        $StatusField.Text = $_
+    }
 }
 $CalculateButton.Add_Click($CalculateButton_Click)
 
