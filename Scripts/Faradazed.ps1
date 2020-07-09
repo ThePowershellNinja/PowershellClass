@@ -139,6 +139,13 @@ $TextChanged = {
         $this.SelectionStart = $cursorPos - 1
         $this.SelectionLength = 0
     }
+
+    if ($this.Text.Length -gt 4){
+        $cursorPos = $this.SelectionStart
+        $this.Text = $this.Text[0..3]
+        $this.SelectionStart = $cursorPos - 1
+        $this.SelectionLength = 0
+    }
 }
 
 $StartTimeTextBox.Add_TextChanged($TextChanged)
