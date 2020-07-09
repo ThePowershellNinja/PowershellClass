@@ -128,6 +128,21 @@ $CalculateButton_Click = {
     }
 }
 $CalculateButton.Add_Click($CalculateButton_Click)
+$TextChanged = {
+    if ($this.Text -match '[^0-9]') {
+        $cursorPos = $this.SelectionStart
+        $this.Text = $this.Text -replace '[^0-9]',''
+        # move the cursor to the end of the text:
+        # $this.SelectionStart = $this.Text.Length
+
+        # or leave the cursor where it was before the replace
+        $this.SelectionStart = $cursorPos - 1
+        $this.SelectionLength = 0
+    }
+}
+
+$StartTimeTextBox.Add_TextChanged($TextChanged)
+$EndTimeTextBox.Add_TextChanged($TextChanged)
 
 
 $Main.Controls.AddRange(@($StartTimeTextBox,$StartTimeLabel,$EndTimeTextBox,$EndTimeLabel,$CalculateButton,$ResultsTextBox,$StatusField))
