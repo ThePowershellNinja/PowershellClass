@@ -1,6 +1,6 @@
 Add-Type -AssemblyName System.Drawing, System.Windows.Forms
 
-function Calculate-Time {
+function Get-BillingHours {
 
     [CmdletBinding()]
 
@@ -57,36 +57,53 @@ $Main = [Windows.Forms.Form]@{
     Text = 'Faradazed'
 }
 
+$Font = New-Object Drawing.Font('GenericSansSerif',24)
+
 #StartTimeLabel
 $StartTimeLabel = [Windows.Forms.Label]@{
-    Location = '10,10'
-    Text     = 'Start Time (24 Hour)'
+    Location    = '10,10'
+    Text        = 'Start Time (24 Hour)'
+    Size        = '325,50'
+    BorderStyle = 'FixedSingle'
+    Font        = $Font
 }
 
 #StartTimeField
 $StartTimeTextBox = [Windows.Forms.TextBox]@{
-    Location = '100,10'
+    Location    = '350,10'
+    Size        = '100,50'
+    Font        = $Font
 }
 
 #EndTimeLabel
 $EndTimeLabel = [Windows.Forms.Label]@{
-    Location = '10,50'
-    Text     = 'End Time (24 Hour)'
+    Location    = '10,70'
+    Text        = 'End Time (24 Hour)'
+    Size        = '325,50'
+    BorderStyle = 'FixedSingle'
+    Font        = $Font
 }
 
 #EndTimeField
 $EndTimeTextBox = [Windows.Forms.TextBox]@{
-    Location = '100,50'
+    Location    = '350,70'
+    Size        = '100,50'
+    Font        = $Font
 }
 
 #CalulateButton
 $CalculateButton = [Windows.Forms.Button]@{
-    Location = '10,100'
+    Location    = '10,130'
+    Text        = 'Calculate'
+    Size        = '250,50'
+    Font        = $Font
 }
 
 #ResultsBox
 $ResultsTextBox = [Windows.Forms.TextBox]@{
-    Location = '100,100'
+    Location    = '350,130'
+    Size        = '100,50'
+    Font        = $Font
 }
 
 
