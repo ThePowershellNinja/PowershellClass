@@ -52,8 +52,11 @@ function Get-BillingHours {
     }
 }
 
+function Size ($Width,$Height){New-Object Drawing.Size($Width,$Height)}
+function Point ($X,$Y){New-Object Drawing.Point($X,$Y)}
+
 $Main = [Windows.Forms.Form]@{
-    ClientSize      = '460,250'
+    ClientSize      = Size 460 250
     Text            = 'Faradazed'
     FormBorderStyle = 'Fixed3d'
     Icon            = "$PSScriptRoot\faradazed.ico"
@@ -63,59 +66,59 @@ $Font = New-Object Drawing.Font('GenericSansSerif',24)
 
 #StartTimeLabel
 $StartTimeLabel = [Windows.Forms.Label]@{
-    Location    = '10,10'
+    Location    = Point 10 10
     Text        = 'Start Time (24 Hour)'
-    Size        = '325,50'
+    Size        = Size 325 50
     BorderStyle = 'FixedSingle'
     Font        = $Font
 }
 
 #StartTimeField
 $StartTimeTextBox = [Windows.Forms.TextBox]@{
-    Location    = '350,10'
-    Size        = '100,50'
+    Location    = Point 350 10
+    Size        = Size 100 50
     Font        = $Font
 }
 
 #EndTimeLabel
 $EndTimeLabel = [Windows.Forms.Label]@{
-    Location    = '10,70'
+    Location    = Point 10 70
     Text        = 'End Time (24 Hour)'
-    Size        = '325,50'
+    Size        = Size 325 50
     BorderStyle = 'FixedSingle'
     Font        = $Font
 }
 
 #EndTimeField
 $EndTimeTextBox = [Windows.Forms.TextBox]@{
-    Location    = '350,70'
-    Size        = '100,50'
+    Location    = Point 350 70
+    Size        = Size 100 50
     Font        = $Font
 }
 
 #CalulateButton
 $CalculateButton = [Windows.Forms.Button]@{
-    Location    = '10,130'
+    Location    = Point 10 130
     Text        = 'Calculate'
-    Size        = '250,50'
+    Size        = Size 250 50
     Font        = $Font
 }
 
 #ResultsBox
 $ResultsTextBox = [Windows.Forms.TextBox]@{
-    Location    = '350,130'
-    Size        = '100,50'
+    Location    = Point 350 130
+    Size        = Size 100 50
     Font        = $Font
     ReadOnly    = $true
 }
 
 $StatusField = [Windows.Forms.Label]@{
-    Location  = '10,190'
-    Size      = '{0},50' -f ($Main.ClientSize.Width - 20)
+    Location  = Point 10 190
+    Size      = Size ($Main.ClientSize.Width - 20) 50
     Font      = New-Object Drawing.Font('GenericSansSerif',12)
     Text      = ''
-    BackColor = 'Black'
-    ForeColor = 'Red'
+    BackColor = [System.Drawing.color]::Black
+    ForeColor = [System.Drawing.Color]::Red
 }
 
 $CalculateButton_Click = {
